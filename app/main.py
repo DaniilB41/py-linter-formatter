@@ -1,9 +1,11 @@
 def format_linter_error(error: dict) -> dict:
-    return {new_key: error[old_key]
-            for old_key, new_key in
-            {"line_number": "line", "column_number": "column",
-             "text": "message", "code": "name"}.items()
-            if old_key in error} | {"source": "flake8"}
+    return {
+        "line": error["line_number"],
+        "column": error["column_number"],
+        "message": error["text"],
+        "name": error["code"],
+        "source": "flake8",
+    }
 
 
 def format_single_linter_file(file_path: str, errors: list) -> dict:
